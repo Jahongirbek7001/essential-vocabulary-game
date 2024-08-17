@@ -25,7 +25,6 @@ export default function Essential1({ params }: Essential1Props) {
 
     return (
         <>
-            <div>{id}</div>
             <Content />
         </>
     );

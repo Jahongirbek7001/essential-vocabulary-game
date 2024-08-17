@@ -261,6 +261,21 @@ body {
   }
 }
 
+@media only screen and (max-width: 500px) {
+  #letter-container button {
+    height: 2.4em;
+    width: 2.4em;
+  }
+
+  #letter-container {
+    gap: 0.2em 0.2em;
+  }
+
+  .wrapper {
+    padding: 5em 1em;
+  }
+}
+
 @media only screen and (max-width: 428px) {
   #letter-container button {
     height: 2em;
