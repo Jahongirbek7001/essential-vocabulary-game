@@ -8,6 +8,7 @@ const EssentialFiveth = () => {
         <>
             <main className="text-white text-2xl flex flex-col items-center justify-between p-24 gap-5">
                 <p>Essential part 5</p>
+                <p>Coming Soon</p>
             </main>
         </>
     )
