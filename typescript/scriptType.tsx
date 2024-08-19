@@ -17,6 +17,11 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
     let linkNextUnit = document.getElementById("linkNextUnit") as HTMLAnchorElement;
     unitName.innerText = nameUnit
 
+    function firstLatterUpperCase(str: string): string {
+        if (str.length === 0) return str; 
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
     const generateRandomValue = (array: any): number => Math.floor(Math.random() * array.length);
 
     const blocker = () => {
@@ -40,7 +45,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
         randomWord = words[generateRandom].word_eng;
         randomHint = words[generateRandom].word_uzb;
         hintRef.innerHTML = `<div id="wordHint">
-                <span>Hint: </span>${randomHint}</div>`;
+                <span>Hint: </span>${firstLatterUpperCase(randomHint)}</div>`;
         let displayItem = "";
         randomWord.split("").forEach(() => {
             displayItem += '<span class="inputSpace">_ </span>';
@@ -84,7 +89,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
                             inputSpaceArray[index].innerText = char;
                             winCount += 1;
                             if (winCount === charArray.length) {
-                                if (loopCount < 2) {
+                                if (loopCount < 14) {
                                     word.innerHTML = `The word was: <span>${randomWord}</span>`;
                                     startBtn.innerText = "Continue";
                                     loopCount++;
