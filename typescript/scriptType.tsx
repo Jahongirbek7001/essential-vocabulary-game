@@ -18,11 +18,24 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
     unitName.innerText = nameUnit
 
     function firstLatterUpperCase(str: string): string {
-        if (str.length === 0) return str; 
+        if (str.length === 0) return str;
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    const generateRandomValue = (array: any): number => Math.floor(Math.random() * array.length);
+    // massivdagi indexlarni randomniy tanlab berish
+    const generateRandomValue = (() => {
+        let availableIndices: number[] = [];
+
+        return (array: any[]): number | undefined => {
+            if (availableIndices.length === 0) {
+                availableIndices = Array.from(array.keys());
+            }
+
+            const randomIndex = Math.floor(Math.random() * availableIndices.length);
+
+            return availableIndices.splice(randomIndex, 1)[0];
+        };
+    })();
 
     const blocker = () => {
         let lettersButtons = document.querySelectorAll(".letters");
@@ -41,7 +54,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
     const generateWord = () => {
         letterContainer.classList.remove("hide");
         userInpSection.innerText = "";
-        let generateRandom = generateRandomValue(words)
+        let generateRandom: any = generateRandomValue(words)
         randomWord = words[generateRandom].word_eng;
         randomHint = words[generateRandom].word_uzb;
         hintRef.innerHTML = `<div id="wordHint">
@@ -52,6 +65,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
         })
         userInpSection.innerHTML = displayItem;
         userInpSection.innerHTML += `<div id='chanceCount'>Chances Left: ${lossCount}</div>`;
+        userInpSection.innerHTML += `<div id='chanceCountTrue'>${loopCount + 1}/15</div>`;
     };
 
     let loopCount: number = 0;
@@ -88,6 +102,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
                             button.classList.add("correct");
                             inputSpaceArray[index].innerText = char;
                             winCount += 1;
+
                             if (winCount === charArray.length) {
                                 if (loopCount < 14) {
                                     word.innerHTML = `The word was: <span>${randomWord}</span>`;

@@ -559,7 +559,7 @@ const data: DataItem[] = [
             { word_eng: "appear", word_uzb: "dek ko'rinmoq" },
             { word_eng: "base", word_uzb: "asos, taglik" },
             { word_eng: "brain", word_uzb: "miyya" },
-            { word_eng: "miyya", word_uzb: "ish faoliyati" },
+            { word_eng: "career", word_uzb: "ish faoliyati" },
             { word_eng: "clerk", word_uzb: "do'kon yordamchisi" },
             { word_eng: "effort", word_uzb: "harakat, urinish" },
             { word_eng: "enter", word_uzb: "kirmoq" },

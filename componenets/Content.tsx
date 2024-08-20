@@ -40,7 +40,7 @@ const Content = () => {
                         <button className="lettersBtn border-2 w-[48px] h-[48px] text-lg font-semibold text-gray-800 bg-white border-gray-200 rounded-lg dark:text-indigo-400  dark:border-indigo-400">M</button>
                     </div>
                 </div>
-                <div className="source">Source: "Coding Artist" Youtube chanel</div>
+                <div className="source">The idea was taken from the Youtube channel <br /> "Coding Artist".</div>
             </div>
 
             <div className="controls-container" id="controls-container">

@@ -129,6 +129,15 @@ body {
   color: #5466EE;
 }
 
+#chanceCountTrue {
+  font-weight: 600;
+  margin: 1em 0;
+  position: absolute;
+  top: 0.62em;
+  right: 10em;
+  color: #5466EE;
+}
+
 #word {
   color: #5466EE;
   font-weight: 600;
