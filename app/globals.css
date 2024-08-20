@@ -39,6 +39,10 @@ body {
   border-radius: 1em;
 }
 
+.soundIcon {
+  cursor: pointer;
+}
+
 .controls-container {
   background-color: #9EA9FA;
   position: absolute;
@@ -48,6 +52,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 20px;
   top: 0;
 }
 

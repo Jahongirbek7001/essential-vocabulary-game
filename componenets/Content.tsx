@@ -1,4 +1,25 @@
+"use client"
+
+import { useRef } from 'react';
+import { FaVolumeUp } from 'react-icons/fa';
+
 const Content = () => {
+
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const audioRefUk = useRef<HTMLAudioElement | null>(null);
+
+    const handlePlay = () => {
+        if (audioRef.current) {
+            audioRef.current.play();
+        }
+    };
+    
+    const handlePlayUk = () => {
+        if (audioRefUk.current) {
+            audioRefUk.current.play();
+        }
+    };
+
     return (
         <>
             <div className="wrapper">
@@ -47,8 +68,30 @@ const Content = () => {
                 <div id="result"></div>
                 <div id="word"></div>
                 <div id="unitName" className="unitName"></div>
-                <div className=" flex justify-center">
+                <div className=' p-5 flex justify-center gap-5 flex-col hide' id='vocabAudio'>
+                    {/* USA */}
+                    <div className=' flex justify-center gap-5'>
+                        <audio ref={audioRef} src={''} id='audioUsa' />
+                        <img width="30" height="30" src="https://img.icons8.com/color/48/usa.png" alt="usa"/>
+                        <img width="30" height="30" src="https://img.icons8.com/ios/50/room-sound.png" alt="room-sound"
+                            className=' soundIcon'
+                            onClick={handlePlay}
+                            title="Play Sound"
+                        />
+                    </div>
+                    {/* UK */}
+                    <div className=' flex justify-center gap-5'>
+                        <audio ref={audioRefUk} src={''}  id='audioUk'/>
+                        <img width="30" height="30" src="https://img.icons8.com/color/48/great-britain.png" alt="great-britain"/>
+                        <img width="30" height="30" src="https://img.icons8.com/ios/50/room-sound.png" alt="room-sound"
+                            className=' soundIcon'
+                            onClick={handlePlayUk}
+                            title="Play Sound"
+                        />
+                    </div>
 
+                </div>
+                <div className=" flex justify-center">
                     <button id="start">Start</button>
                     <a href={""} id="linkNextUnit">
                         <button className="hide" id="nextUnit">Next Unit</button>

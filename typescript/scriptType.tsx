@@ -14,6 +14,9 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
     let lettersBtn = document.getElementsByClassName("lettersBtn");
     let lettersBtnArray: any[] = Array.from(lettersBtn);
     let unitName = document.getElementById("unitName") as HTMLDivElement;
+    let vocabAudio = document.getElementById("vocabAudio") as HTMLDivElement;
+    let audioUSa = document.getElementById("audioUsa") as HTMLAudioElement
+    let audioUk = document.getElementById("audioUk") as HTMLAudioElement
     let linkNextUnit = document.getElementById("linkNextUnit") as HTMLAnchorElement;
     unitName.innerText = nameUnit
 
@@ -109,6 +112,9 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
                                     startBtn.innerText = "Continue";
                                     loopCount++;
                                     unitName.classList.add("hide");
+                                    vocabAudio.classList.remove("hide");
+                                    audioUSa.src = `/audio/usa/${randomWord}.mp3`
+                                    audioUk.src = `/audio/uk/${randomWord}.mp3`
                                     resultText.innerText = "";
 
                                 } else {
@@ -116,8 +122,10 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
                                     startBtn.innerText = "Restart";
                                     startBtn.addEventListener("click", () => {
                                         nextUnit.classList.add("hide");
+                                        vocabAudio.classList.remove("hide");
                                     })
                                     nextUnit.classList.remove("hide");
+                                    
                                     linkNextUnit.href = `${linkNameNextUnit + 1}`;
                                     loopCount = 0
                                 }
@@ -136,6 +144,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
                         word.innerHTML = `The word was: <span>${randomWord}</span>`;
                         resultText.innerText = "Game Over";
                         startBtn.innerText = "Restart";
+                        vocabAudio.classList.add("hide");
                         loopCount = 0;
                         blocker();
                     }
