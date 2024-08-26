@@ -172,7 +172,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
             chance.innerText = `Chance Left: ${lossCount}`;
             message.innerText = `Incorrect Letter`;
             message.style.color = "#FD2030";
-            if (lossCount == 0) {
+            if (lossCount === 0) {
                 word.innerHTML = `The word was: <span>${randomWord}</span>`;
                 resultText.innerText = "Game Over";
                 startBtn.innerText = "Restart";
