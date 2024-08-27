@@ -1,8 +1,20 @@
-"use client"
+"use client";
 import Content from "@/componenets/Content";
 import scriptType from "@/typescript/scriptType";
-import { useEffect } from "react";
-import data from "@/app/essential-1/data";
+import { useEffect, useState } from "react";
+
+type Option = {
+    word_eng: string;
+    word_uzb: string;
+};
+
+type Unit = {
+    book_id: number;
+    book_name: string;
+    unit_id: number;
+    unit_name: string;
+    options: Option[];
+};
 
 interface Params {
     id: number;
@@ -13,15 +25,34 @@ interface Essential1Props {
 }
 
 export default function Essential1({ params }: Essential1Props) {
-    const id: number = Number(params.id);
+    const [data, setData] = useState<Unit[] | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
-    for (let i = 0; i < data.length; i++) {
-        if (data[i].unit_id == id) {
-            useEffect(() => {
-                scriptType(data[i].options, data[i].unit_name, data[i].unit_id)
-            }, []);
+    useEffect(() => {
+        fetch('https://word-game-data.vercel.app/essential1.json')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((jsonData: Unit[]) => setData(jsonData))
+            .catch((err) => setError(err.message));
+    }, []);
+
+    // Hooklarni shartli ravishda emas, tartib bilan chaqirish
+    useEffect(() => {
+        if (data) {
+            const id = Number(params.id);
+            const selectedUnit = data.find(unit => unit.unit_id === id);
+            if (selectedUnit) {
+                scriptType(selectedUnit.options, selectedUnit.unit_name, selectedUnit.unit_id);
+            }
         }
-    }
+    }, [data, params.id]);
+
+    if (error) return <div>Error: {error}</div>;
+    if (!data) return <div>Loading...</div>;
 
     return (
         <>

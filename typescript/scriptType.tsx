@@ -141,8 +141,8 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
                             loopCount++;
                             unitName.classList.add("hide");
                             vocabAudio.classList.remove("hide");
-                            audioUSa.src = `/audio/usa/${randomWord}.mp3`;
-                            audioUk.src = `/audio/uk/${randomWord}.mp3`;
+                            audioUSa.src = `https://word-game-data.vercel.app/audio/usa/${randomWord}.mp3`;
+                            audioUk.src = `https://word-game-data.vercel.app/audio/uk/${randomWord}.mp3`;
                             resultText.innerText = "";
                         } else {
                             resultText.innerHTML = "You Won";
@@ -172,7 +172,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
             chance.innerText = `Chance Left: ${lossCount}`;
             message.innerText = `Incorrect Letter`;
             message.style.color = "#FD2030";
-            if (lossCount === 0) {
+            if (lossCount == 0) {
                 word.innerHTML = `The word was: <span>${randomWord}</span>`;
                 resultText.innerText = "Game Over";
                 startBtn.innerText = "Restart";

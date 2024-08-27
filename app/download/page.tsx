@@ -1,12 +1,12 @@
 import Link from "next/link";
 
 const dataEssenBook = [
-    { id: 1, bookPdf: '/pdf/essentialBook1.pdf' },
-    { id: 2, bookPdf: '/pdf/essentialBook2.pdf' },
-    { id: 3, bookPdf: '/pdf/essentialBook3.pdf' },
-    { id: 4, bookPdf: '/pdf/essentialBook4.pdf' },
-    { id: 5, bookPdf: '/pdf/essentialBook5.pdf' },
-    { id: 6, bookPdf: '/pdf/essentialBook6.pdf' },
+    { id: 1, bookPdf: 'https://t.me/malikaeducationofficiall/31' },
+    { id: 2, bookPdf: 'https://t.me/malikaeducationofficiall/39' },
+    { id: 3, bookPdf: 'https://t.me/malikaeducationofficiall/46' },
+    { id: 4, bookPdf: 'https://t.me/malikaeducationofficiall/65' },
+    { id: 5, bookPdf: 'https://t.me/malikaeducationofficiall/68' },
+    { id: 6, bookPdf: 'https://t.me/malikaeducationofficiall/85' },
 ];
 
 const Download = () => {
