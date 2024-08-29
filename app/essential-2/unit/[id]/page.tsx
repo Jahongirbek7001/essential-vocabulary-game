@@ -1,7 +1,8 @@
-"use client"
+"use client";
+import Content from "@/componenets/Content";
+import scriptType from "@/typescript/scriptType";
+import { useEffect, useState } from "react";
 
-import Link from "next/link";
-import { useEffect, useState } from 'react';
 type Option = {
     word_eng: string;
     word_uzb: string;
@@ -15,7 +16,15 @@ type Unit = {
     options: Option[];
 };
 
-const EssentialSecond = () => {
+interface Params {
+    id: number;
+}
+
+interface Essential1Props {
+    params: Params;
+}
+
+export default function Essential1({ params }: Essential1Props) {
     const [data, setData] = useState<Unit[] | null>(null);
     const [error, setError] = useState<string | null>(null);
 
@@ -31,21 +40,23 @@ const EssentialSecond = () => {
             .catch((err) => setError(err.message));
     }, []);
 
+    // Hooklarni shartli ravishda emas, tartib bilan chaqirish
+    useEffect(() => {
+        if (data) {
+            const id = Number(params.id);
+            const selectedUnit = data.find(unit => unit.unit_id === id);
+            if (selectedUnit) {
+                scriptType(selectedUnit.options, selectedUnit.unit_name, selectedUnit.unit_id);
+            }
+        }
+    }, [data, params.id]);
+
     if (error) return <div>Error: {error}</div>;
     if (!data) return <div>Loading...</div>;
 
     return (
         <>
-            <main className="text-white text-xl xl:text-2xl grid grid-cols-1 md:grid-cols-5 mx-auto p-24 gap-3">
-                {
-                    data.map((element) => (
-                        <Link className=" border-2 p-2 flex justify-center rounded-lg shadow-lg" key={element.unit_id} href={`/essential-${element.book_id}/unit/${element.unit_id}`}>
-                            <div className=" ">Unit - {element.unit_id}</div>
-                        </Link>
-                    ))
-                }
-            </main>
+            <Content />
         </>
-    )
+    );
 }
-export default EssentialSecond;
