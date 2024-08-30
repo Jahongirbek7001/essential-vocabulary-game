@@ -10,7 +10,8 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
     const word = document.getElementById("word") as HTMLDivElement;
     const words = options;
     let randomWord: string = "", randomHint: string = "";
-    let winCount = 0, lossCount = 0;
+    let winCount = 0
+    let lossCount = 0;
     let lettersBtn = document.getElementsByClassName("lettersBtn");
     let lettersBtnArray: any[] = Array.from(lettersBtn);
     let unitName = document.getElementById("unitName") as HTMLDivElement;
@@ -141,8 +142,8 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
                             loopCount++;
                             unitName.classList.add("hide");
                             vocabAudio.classList.remove("hide");
-                            audioUSa.src = `https://word-game-data.vercel.app/audio/usa/${randomWord}.mp3`;
-                            audioUk.src = `https://word-game-data.vercel.app/audio/uk/${randomWord}.mp3`;
+                            audioUSa.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/usa/${randomWord}.mp3`;
+                            audioUk.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/uk/${randomWord}.mp3`;
                             resultText.innerText = "";
                         } else {
                             resultText.innerHTML = "You Won";
@@ -172,7 +173,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
             chance.innerText = `Chance Left: ${lossCount}`;
             message.innerText = `Incorrect Letter`;
             message.style.color = "#FD2030";
-            if (lossCount == 0) {
+            if (lossCount === 0) {
                 word.innerHTML = `The word was: <span>${randomWord}</span>`;
                 resultText.innerText = "Game Over";
                 startBtn.innerText = "Restart";

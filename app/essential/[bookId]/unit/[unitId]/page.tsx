@@ -17,7 +17,8 @@ type Unit = {
 };
 
 interface Params {
-    id: number;
+    bookId: number;
+    unitId: number;
 }
 
 interface Essential1Props {
@@ -29,7 +30,8 @@ export default function Essential1({ params }: Essential1Props) {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        fetch('https://word-game-data.vercel.app/essential1.json')
+        const { bookId } = params;
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/essential${bookId}.json`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -38,18 +40,17 @@ export default function Essential1({ params }: Essential1Props) {
             })
             .then((jsonData: Unit[]) => setData(jsonData))
             .catch((err) => setError(err.message));
-    }, []);
+    }, [params]);
 
-    // Hooklarni shartli ravishda emas, tartib bilan chaqirish
     useEffect(() => {
         if (data) {
-            const id = Number(params.id);
+            const id = Number(params.unitId);
             const selectedUnit = data.find(unit => unit.unit_id === id);
             if (selectedUnit) {
                 scriptType(selectedUnit.options, selectedUnit.unit_name, selectedUnit.unit_id);
             }
         }
-    }, [data, params.id]);
+    }, [data, params.unitId]);
 
     if (error) return <div>Error: {error}</div>;
     if (!data) return <div>Loading...</div>;
