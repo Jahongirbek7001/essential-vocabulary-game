@@ -157,11 +157,6 @@
   width: 3em;
 }
 
-#letter-container button:hover {
-  width: 2.9em;
-  height: 2.9em;
-}
-
 #letter-container .correct {
   background-color: #20B700;
   color: #ffffff;
@@ -250,6 +245,10 @@ nav a {
 .active-link {
   color: rgba(240, 0, 80, 255);
 }
+.nav-links.active {
+  background-color: white;
+  border-bottom: 1px solid gainsboro;
+}
 
 .nav-links a:hover {
   color: rgba(240, 0, 80, 255);
@@ -273,7 +272,7 @@ nav a {
 .burger .line {
   width: 25px;
   height: 3px;
-  background-color: #D1D6FD;
+  background-color: black;
 }
 
 /* Burger menu toggle animation */
