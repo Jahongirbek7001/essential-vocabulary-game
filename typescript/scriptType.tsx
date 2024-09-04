@@ -6,6 +6,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
     const nextUnit = document.getElementById("nextUnit") as HTMLButtonElement;
     const letterContainer = document.getElementById("letter-container") as HTMLDivElement;
     const userInpSection = document.getElementById("user-input-section") as HTMLDivElement;
+    // const controlsBgBox = document.getElementById("controlsBgBox") as HTMLDivElement;
     const resultText = document.getElementById("result") as HTMLDivElement;
     const word = document.getElementById("word") as HTMLDivElement;
     const words = options;
@@ -28,6 +29,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
 
     const blocker = () => {
         let lettersButtons = document.querySelectorAll(".letters");
+        
         stopGame();
     }
 
@@ -63,7 +65,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
         randomWord = words[generateRandom].word_eng;
         randomHint = words[generateRandom].word_uzb;
         hintRef.innerHTML = `<div id="wordHint">
-                <span>Hint: </span>${firstLatterUpperCase(randomHint)}</div>`;
+                <span>Hint: </span><span>${firstLatterUpperCase(randomHint)}</span></div>`;
         let displayItem = "";
         randomWord.split("").forEach(() => {
             displayItem += '<span class="inputSpace">_ </span>';
@@ -145,6 +147,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
                             audioUSa.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/usa/${randomWord}.mp3`;
                             audioUk.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/uk/${randomWord}.mp3`;
                             resultText.innerText = "";
+                            controls.classList.remove('gifBg')
                         } else {
                             resultText.innerHTML = "You Won";
                             startBtn.innerText = "Restart";
@@ -152,7 +155,9 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
                                 nextUnit.classList.add("hide");
                                 vocabAudio.classList.remove("hide");
                             });
+                            // controls.classList.remove('gifBg')
                             nextUnit.classList.remove("hide");
+                            controls.classList.add('gifBg')
 
                             linkNextUnit.href = `${linkNameNextUnit + 1}`;
                             loopCount = 0;
@@ -178,6 +183,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
                 resultText.innerText = "Game Over";
                 startBtn.innerText = "Restart";
                 vocabAudio.classList.add("hide");
+                nextUnit.classList.add("hide");
                 loopCount = 0;
                 blocker();
             }

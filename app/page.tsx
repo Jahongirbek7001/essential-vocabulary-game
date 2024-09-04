@@ -32,7 +32,7 @@ export default function Home() {
     <main className=" w-[90%] text-white text-2xl grid grid-cols-1 sm:grid-cols-3 mx-auto p-24 gap-5">
       {
         dataEssen.map((i) => (
-          <div className=" overflow-hidden mx-auto" key={i.id}>
+          <div className=" overflow-hidden mx-auto shadow-2xl" key={i.id}>
             <Link href={`/essential/${i.id}`}>
               <Image className=" object-cover" src={i.image} alt={`Essential Part ${i.id}`} />
             </Link>

@@ -11,9 +11,9 @@ const dataEssenBook = [
 
 const Download = () => {
     return (
-        <main className="text-white text-2xl grid grid-cols-s sm:grid-cols-3  p-24 gap-5">
+        <main className=" text-xl  grid grid-cols-s sm:grid-cols-3  p-24 gap-5">
             {dataEssenBook.map((i) => (
-                <div className="overflow-hidden border-2 p-3 rounded-lg text-center" key={i.id}>
+                <div className="overflow-hidden hover:bg-customPink hover:text-white border-2 p-3 rounded-lg text-center" key={i.id}>
                     <Link href={i.bookPdf} download>
                         4000 Essential English Words Part {i.id}
                     </Link>

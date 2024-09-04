@@ -2,6 +2,8 @@
 import Content from "@/componenets/Content";
 import scriptType from "@/typescript/scriptType";
 import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react"
+
 
 type Option = {
     word_eng: string;
@@ -53,7 +55,13 @@ export default function Essential1({ params }: Essential1Props) {
     }, [data, params.unitId]);
 
     if (error) return <div>Error: {error}</div>;
-    if (!data) return <div>Loading...</div>;
+    if (!data) {
+        return (
+            <main className="flex justify-center items-center h-[1200px] xl:h-[650px]">
+                <Loader2 className="mr-2 h-20 w-20 animate-spin text-customPink" />
+            </main>
+        );
+    }
 
     return (
         <>
