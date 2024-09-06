@@ -20,7 +20,7 @@ export default function Navbar() {
         <>
             <nav className=" p-3 border-2 border-solid border-gray-400">
                 <div className=" w-[90%] mx-auto flex justify-between items-center">
-                    <Link href={'/'} className="logo text-3xl">Essential</Link>
+                    <Link href={'/'} className=" text-3xl">Essential</Link>
                     <ul className="nav-links flex items-center gap-5">
                         <li><Link href={'/'}>Home</Link></li>
                         <li><Link href={"/download"}>Download</Link></li>

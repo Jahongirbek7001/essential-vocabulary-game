@@ -14,7 +14,8 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
     let winCount = 0
     let lossCount = 0;
     let lettersBtn = document.getElementsByClassName("lettersBtn");
-    let lettersBtnArray: any[] = Array.from(lettersBtn);
+    // let lettersBtnArray: any[] = Array.from(lettersBtn);
+    let lettersBtnArray: string[] = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
     let unitName = document.getElementById("unitName") as HTMLDivElement;
     let vocabAudio = document.getElementById("vocabAudio") as HTMLDivElement;
     let audioUSa = document.getElementById("audioUsa") as HTMLAudioElement;
@@ -29,7 +30,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
 
     const blocker = () => {
         let lettersButtons = document.querySelectorAll(".letters");
-        
+
         stopGame();
     }
 
@@ -96,7 +97,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
             if (i == 19) {
                 button.style.marginLeft = "20px";
             }
-            button.innerText = lettersBtnArray[i].innerText;
+            button.innerText = lettersBtnArray[i];
 
             // Character button onclick
             button.addEventListener("click", () => handleLetterClick(button.innerText));

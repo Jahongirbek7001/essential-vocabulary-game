@@ -6,6 +6,14 @@ import essential4 from "@/src/images/essential4.png"
 import essential5 from "@/src/images/essential5.png"
 import essential6 from "@/src/images/essential6.png"
 import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 const dataEssen = [
   {
     id: 1, image: essential1
@@ -32,11 +40,11 @@ export default function Home() {
     <main className=" w-[90%] text-white text-2xl grid grid-cols-1 sm:grid-cols-3 mx-auto p-24 gap-5">
       {
         dataEssen.map((i) => (
-          <div className=" overflow-hidden mx-auto shadow-2xl" key={i.id}>
+          <Card className=" overflow-hidden mx-auto shadow-2xl" key={i.id}>
             <Link href={`/essential/${i.id}`}>
               <Image className=" object-cover" src={i.image} alt={`Essential Part ${i.id}`} />
             </Link>
-          </div>
+          </Card>
         ))
       }
     </main>
