@@ -66,7 +66,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
         randomWord = words[generateRandom].word_eng;
         randomHint = words[generateRandom].word_uzb;
         hintRef.innerHTML = `<div id="wordHint">
-                <span>Hint: </span><span>${firstLatterUpperCase(randomHint)}</span></div>`;
+                <span>Hint: </span>${firstLatterUpperCase(randomHint)}</div>`;
         let displayItem = "";
         randomWord.split("").forEach(() => {
             displayItem += '<span class="inputSpace">_ </span>';

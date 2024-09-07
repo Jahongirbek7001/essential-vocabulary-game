@@ -2,6 +2,14 @@
 
 import { useRef } from 'react';
 import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 
 const Content = () => {
@@ -23,13 +31,13 @@ const Content = () => {
 
     return (
         <>
-            <div className="wrapper">
+            <Card className="wrapper">
                 <div className="hint-ref" id="hint-ref"></div>
                 <div id="user-input-section"></div>
                 <div id="message"></div>
                 <div id="letter-container"></div>
                 <div className="source">The idea was taken from the Youtube channel <br /> <span>Coding Artist</span></div>
-            </div>
+            </Card>
 
             <div className="controls-container" id="controls-container">
                 <div id="result"></div>
@@ -53,7 +61,6 @@ const Content = () => {
                             onClick={handlePlayUk}
                             title="Play Sound" />
                     </div>
-
                 </div>
                 <div className="box flex justify-center">
                     <Button id="start">Start</Button>

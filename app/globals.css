@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import url('https://www.fontshare.com/fonts/chillax');
 
 @font-face {

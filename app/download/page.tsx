@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button"
+
 
 const dataEssenBook = [
     { id: 1, bookPdf: 'https://t.me/malikaeducationofficiall/31' },
@@ -11,13 +13,13 @@ const dataEssenBook = [
 
 const Download = () => {
     return (
-        <main className=" text-xl  grid grid-cols-s sm:grid-cols-3  p-24 gap-5">
+        <main className=" text-xl  grid grid-cols-s sm:grid-cols-3 p-16 gap-3">
             {dataEssenBook.map((i) => (
-                <div className="overflow-hidden hover:bg-customPink hover:text-white border-2 p-3 rounded-lg text-center" key={i.id}>
+                <Button className=" h-full overflow-hidden hover:bg-customPink hover:text-white hover:border-customPink border-2 p-4 rounded-lg text-center" key={i.id}>
                     <Link href={i.bookPdf} download>
                         4000 Essential English Words Part {i.id}
                     </Link>
-                </div>
+                </Button>
             ))}
         </main>
     );
