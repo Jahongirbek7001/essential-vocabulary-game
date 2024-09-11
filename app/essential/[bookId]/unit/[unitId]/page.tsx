@@ -1,9 +1,8 @@
 "use client";
-import Content from "@/componenets/Content";
-import scriptType from "@/typescript/scriptType";
+import script from '@/app/typescript/script'
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react"
-
+import Content from '@/app/component/Content'
 
 type Option = {
     word_eng: string;
@@ -49,7 +48,7 @@ export default function Essential1({ params }: Essential1Props) {
             const id = Number(params.unitId);
             const selectedUnit = data.find(unit => unit.unit_id === id);
             if (selectedUnit) {
-                scriptType(selectedUnit.options, selectedUnit.unit_name, selectedUnit.unit_id);
+                script(selectedUnit.options, selectedUnit.unit_name, selectedUnit.unit_id);
             }
         }
     }, [data, params.unitId]);

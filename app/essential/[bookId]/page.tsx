@@ -57,8 +57,8 @@ const EssentialParams = ({ params }: Essential1Props) => {
             <main className=" text-lg xl:text-xl grid grid-cols-2 md:grid-cols-5 mx-auto p-24 gap-3">
                 {
                     data.map((element) => (
-                        <Button className=" h-full border-2 p-3 flex justify-center rounded-lg shadow-lg hover:bg-customPink hover:text-white hover:border-customPink">
-                            <Link key={element.unit_id} href={`/essential/${element.book_id}/unit/${element.unit_id}`}>
+                        <Button key={element.unit_id} className=" h-full border-2 p-3 flex justify-center rounded-lg shadow-lg hover:bg-customPink hover:text-white hover:border-customPink">
+                            <Link href={`/essential/${element.book_id}/unit/${element.unit_id}`}>
                                 <div>Unit - {element.unit_id}</div>
                             </Link>
                         </Button>

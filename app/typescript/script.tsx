@@ -6,21 +6,19 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
     const nextUnit = document.getElementById("nextUnit") as HTMLButtonElement;
     const letterContainer = document.getElementById("letter-container") as HTMLDivElement;
     const userInpSection = document.getElementById("user-input-section") as HTMLDivElement;
-    // const controlsBgBox = document.getElementById("controlsBgBox") as HTMLDivElement;
     const resultText = document.getElementById("result") as HTMLDivElement;
     const word = document.getElementById("word") as HTMLDivElement;
     const words = options;
     let randomWord: string = "", randomHint: string = "";
     let winCount = 0
     let lossCount = 0;
-    let lettersBtn = document.getElementsByClassName("lettersBtn");
-    // let lettersBtnArray: any[] = Array.from(lettersBtn);
     let lettersBtnArray: string[] = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
     let unitName = document.getElementById("unitName") as HTMLDivElement;
     let vocabAudio = document.getElementById("vocabAudio") as HTMLDivElement;
     let audioUSa = document.getElementById("audioUsa") as HTMLAudioElement;
     let audioUk = document.getElementById("audioUk") as HTMLAudioElement;
     let linkNextUnit = document.getElementById("linkNextUnit") as HTMLAnchorElement;
+    let buttonMap: Record<string, HTMLButtonElement> = {};
     unitName.innerText = nameUnit;
 
     function firstLatterUpperCase(str: string): string {
@@ -30,17 +28,16 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
 
     const blocker = () => {
         let lettersButtons = document.querySelectorAll(".letters");
-
         stopGame();
     }
 
     const startGame = () => {
-        controls.classList.add("hide");
+        controls.classList.add("hidden");
         init();
     }
 
     const stopGame = () => {
-        controls.classList.remove("hide");
+        controls.classList.remove("hidden");
     }
 
     const generateRandomValue = (() => {
@@ -58,7 +55,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
     })();
 
     const generateWord = () => {
-        letterContainer.classList.remove("hide");
+        letterContainer.classList.remove("hidden");
         userInpSection.innerText = "";
         let generateRandom: any = generateRandomValue(words);
         console.log(generateRandom);
@@ -86,109 +83,125 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
         randomHint = "";
         message.innerText = "";
         userInpSection.innerHTML = "";
-        letterContainer.classList.add("hide");
+        letterContainer.classList.add("hidden");
         letterContainer.innerHTML = "";
+        buttonMap = {};
         generateWord();
-
+        const br = document.createElement('br');
         // For creating letter buttons
-        for (let i = 0; i < lettersBtnArray.length; i++) {
+        lettersBtnArray.forEach((letter, index) => {
             let button = document.createElement("button");
-            button.classList.add("lettersBtn");
-            if (i == 19) {
-                button.style.marginLeft = "20px";
+            button.classList.add('bg-white', 'text-gray-800', 'outline-none', 'rounded-md', 'cursor-pointer', 'h-[28px]', 'w-[28px]', 'border-2', 'mx-[2px]', 'sm:mx-1', 'sm:w-[2em]', 'sm:h-[2em]', 'md:3em', 'md:3em');
+            button.innerText = letter;
+            if (index == 10) {
+                letterContainer.appendChild(br);
             }
-            button.innerText = lettersBtnArray[i];
+            if (index == 19) {
+                letterContainer.appendChild(br);
+            }
+            // Store the button reference in the map
+            buttonMap[letter] = button;
 
-            // Character button onclick
-            button.addEventListener("click", () => handleLetterClick(button.innerText));
+            // Add click event listener
+            button.addEventListener("click", () => handleLetterClick(letter));
 
-            // Append generated buttons to the letters container
+            // Append generated buttons to the letter container
             letterContainer.appendChild(button);
-        }
+        });
 
         // Listen for keyboard presses
         document.addEventListener("keydown", handleKeyPress);
     };
 
-    // Handle letter click or key press
     const handleLetterClick = (letter: string) => {
-        // Check if the letter button has already been disabled
-        let button = Array.from(lettersBtn).find((btn) => (btn as HTMLButtonElement).innerText === letter) as HTMLButtonElement;
-        if (button && button.disabled) {
+        let button = buttonMap[letter]; // Get the button from the map
+
+        if (!button || button.disabled) {
             return; // If the letter has already been guessed, do nothing
         }
 
-        message.innerText = `Correct Letter`;
-        message.style.color = "#20B700";
         let charArray = randomWord.toUpperCase().split("");
         let inputSpace = document.getElementsByClassName("inputSpace");
         let inputSpaceArray: HTMLElement[] = Array.from(inputSpace) as HTMLElement[];
 
-        // If the character is in the array
+        // If the character is in the word
         if (charArray.includes(letter)) {
+            // Correct guess logic
+            message.innerText = `Correct Letter`;
+            message.style.color = "#20B700";
             charArray.forEach((char, index) => {
                 if (char === letter) {
-                    if (button) {
-                        console.log("correct");
-                        button.classList.add("correct");
-                        button.disabled = true;
-                    }
+                    // Add correct guess styles
+                    button.classList.remove('bg-white', 'text-gray-800');
+                    button.classList.add('bg-[#20B700]', 'text-white', 'border-2', 'border-[#20B700]');
+                    button.disabled = true;
+
                     // Replace dash with letter
                     inputSpaceArray[index].innerText = char;
-                    // Increment counter
-                    winCount += 1;
-                    // Check if the player has won
-                    if (winCount == charArray.length) {
-                        if (loopCount < 14) {
-                            word.innerHTML = `The word was: <span>${randomWord}</span>`;
-                            startBtn.innerText = "Continue";
-                            loopCount++;
-                            unitName.classList.add("hide");
-                            vocabAudio.classList.remove("hide");
-                            audioUSa.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/usa/${randomWord}.mp3`;
-                            audioUk.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/uk/${randomWord}.mp3`;
-                            resultText.innerText = "";
-                            controls.classList.remove('gifBg')
-                        } else {
-                            resultText.innerHTML = "You Won";
-                            startBtn.innerText = "Restart";
-                            startBtn.addEventListener("click", () => {
-                                nextUnit.classList.add("hide");
-                                vocabAudio.classList.remove("hide");
-                            });
-                            // controls.classList.remove('gifBg')
-                            nextUnit.classList.remove("hide");
-                            controls.classList.add('gifBg')
+                    // Increment win counter
+                    winCount++;
 
-                            linkNextUnit.href = `${linkNameNextUnit + 1}`;
-                            loopCount = 0;
-                        }
-                        blocker();
+                    // Check if player has won
+                    if (winCount == charArray.length) {
+                        handleWin();
                     }
                 }
             });
         } else {
-            // Incorrect letter logic
-            if (button) {
-                console.log("incorrect");
-                button.classList.add("incorrect");
-                button.disabled = true;
-            }
-            lossCount -= 1;
-            let chance = document.getElementById("chanceCount") as HTMLDivElement;
-            chance.innerText = `Chance Left: ${lossCount}`;
+            // Incorrect guess logic
             message.innerText = `Incorrect Letter`;
             message.style.color = "#FD2030";
+            button.classList.remove('bg-white', 'text-gray-800');
+            button.classList.add('bg-[#FD2030]', 'text-white', 'border-2', 'border-[#FD2030]');
+            button.disabled = true;
+            lossCount--;
+
+            let chance = document.getElementById("chanceCount") as HTMLDivElement;
+            chance.innerText = `Chances Left: ${lossCount}`;
+
             if (lossCount === 0) {
-                word.innerHTML = `The word was: <span>${randomWord}</span>`;
-                resultText.innerText = "Game Over";
-                startBtn.innerText = "Restart";
-                vocabAudio.classList.add("hide");
-                nextUnit.classList.add("hide");
-                loopCount = 0;
-                blocker();
+                handleLoss();
             }
         }
+    };
+
+    // Handle win condition
+    const handleWin = () => {
+        if (loopCount < 14) {
+            word.innerHTML = `The word was: <span>${firstLatterUpperCase(randomWord)}</span>`;
+            startBtn.innerText = "Continue";
+            loopCount++;
+            unitName.classList.add("hidden");
+            vocabAudio.classList.remove("hidden");
+            audioUSa.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/usa/${randomWord}.mp3`;
+            audioUk.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/uk/${randomWord}.mp3`;
+            resultText.innerText = "";
+            controls.classList.remove('gifBg')
+        } else {
+            resultText.innerHTML = "You Won";
+            startBtn.innerText = "Restart";
+            startBtn.addEventListener("click", () => {
+                nextUnit.classList.add("hidden");
+                vocabAudio.classList.remove("hidden");
+            });
+            nextUnit.classList.remove("hidden");
+            controls.classList.add('gifBg')
+
+            linkNextUnit.href = `${linkNameNextUnit + 1}`;
+            loopCount = 0;
+        }
+        blocker();
+    };
+
+    // Handle loss condition
+    const handleLoss = () => {
+        word.innerHTML = `The word was: <span>${firstLatterUpperCase(randomWord)}</span>`;
+        resultText.innerText = "Game Over";
+        startBtn.innerText = "Restart";
+        vocabAudio.classList.add("hidden");
+        nextUnit.classList.add("hidden");
+        loopCount = 0;
+        blocker();
     };
 
 
