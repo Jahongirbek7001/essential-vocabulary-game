@@ -38,6 +38,7 @@ export default function Navbar() {
                     {/* Menu for large screens */}
                     <ul className="nav-links flex items-center gap-5 hidden md:flex">
                         <li><Link href={'/'}>Home</Link></li>
+                        <li><Link href={"/irregular-verbs"}>Irregular Verbs</Link></li>
                         <li><Link href={"/download"}>Download</Link></li>
                     </ul>
                 </div>
