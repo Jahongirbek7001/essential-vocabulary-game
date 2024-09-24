@@ -31,7 +31,7 @@ export default function Essential1({ params }: Essential1Props) {
                     </Link>
                 </Button>
                 <Button className="h-full w-[200px] border-2 p-3 rounded-lg shadow-lg hover:w-[203px]">
-                    <Link href={`/essential/${bookId}/unit/${unitId}/vocabulary`}>
+                    <Link href={`/essential/${bookId}/unit/${unitId}/sentence`}>
                         <img src="/gif/book.gif" className=" w-full" alt="sx" />
                         <span>SENTENCE</span>
                     </Link>

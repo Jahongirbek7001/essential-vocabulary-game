@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import Content from '@/app/component/Content';
 import script from '@/app/typescript/script';
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type Option = {
     word_eng: string;
@@ -69,6 +71,41 @@ const Vocabulary = ({ params }: VocabProps) => {
                             </tbody>
                         </table>
                     }
+                    <div className=" flex justify-center items-center mt-5 gap-5">
+                        <Button
+                            className={
+                                Number(unitId) === 1 && Number(bookId) === 1
+                                    ? "hidden"
+                                    : "w-[150px] border-2 p-3 rounded-lg shadow-lg"
+                            }
+                        >
+                            <Link href={
+                                Number(bookId) === 1
+                                    ? `/essential/${Number(bookId)}/unit/${Number(unitId) - 1}/vocabulary`
+                                    : `/essential/${Number(bookId) - 1}/unit/30/vocabulary`
+                            }
+
+                            >
+                                <span>PREVIOUS UNIT</span>
+                            </Link>
+                        </Button>
+                        <Button
+                            className={
+                                Number(unitId) === 30 && Number(bookId) === 6
+                                    ? "hidden"
+                                    : "w-[150px] border-2 p-3 rounded-lg shadow-lg"
+                            }
+                        >
+                            <Link href={
+                                Number(unitId) === 30
+                                    ? `/essential/${Number(bookId) + 1}/unit/1/vocabulary`
+                                    : `/essential/${Number(bookId)}/unit/${Number(unitId) + 1}/vocabulary`
+                            }>
+                                <span>NEXT UNIT</span>
+                            </Link>
+                        </Button>
+                    </div>
+
 
                 </div>
             </main>
