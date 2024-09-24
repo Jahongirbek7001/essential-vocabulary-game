@@ -89,6 +89,11 @@ const Vocabulary = ({ params }: VocabProps) => {
                                 <span>PREVIOUS UNIT</span>
                             </Link>
                         </Button>
+                        <Button className="w-[150px] border-2 p-3 rounded-lg shadow-lg">
+                            <Link href={`/essential/${Number(bookId)}/unit/${Number(unitId)}`}>
+                                <span>MAIN UNIT</span>
+                            </Link>
+                        </Button>
                         <Button
                             className={
                                 Number(unitId) === 30 && Number(bookId) === 6
