@@ -24,6 +24,7 @@ const config: Config = {
 			gradientBg: 'linear-gradient(220.55deg, #FFED46 0%, #FF7EC7 100%)',
 			customPink: '#f00050',
 			primaryColor: 'rgba(240, 0, 80, 255)',
+			secondaryColor: '#C9FFFF',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

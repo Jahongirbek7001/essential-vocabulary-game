@@ -33,6 +33,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
 
     const startGame = () => {
         controls.classList.add("hidden");
+        console.log(1);
         init();
     }
 
@@ -88,6 +89,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
         buttonMap = {};
         generateWord();
         const br = document.createElement('br');
+        const br2 = document.createElement('br');
         // For creating letter buttons
         lettersBtnArray.forEach((letter, index) => {
             let button = document.createElement("button");
@@ -96,8 +98,8 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
             if (index == 10) {
                 letterContainer.appendChild(br);
             }
-            if (index == 19) {
-                letterContainer.appendChild(br);
+            else if (index == 19) {
+                letterContainer.appendChild(br2);
             }
             // Store the button reference in the map
             buttonMap[letter] = button;
