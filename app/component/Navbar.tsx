@@ -49,6 +49,7 @@ export default function Navbar() {
                         }`}
                 >
                     <li className="p-3 border-b border-gray-300"><Link href={'/'}>Home</Link></li>
+                    <li className="p-3"><Link href={"/irregular-verbs"}>Irregular Verbs</Link></li>
                     <li className="p-3"><Link href={"/download"}>Download</Link></li>
                 </ul>
             </nav>
