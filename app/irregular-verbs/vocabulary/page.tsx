@@ -35,7 +35,7 @@ const IrregularVocabulary = () => {
             <main className="text-lg xl:text-xl grid grid-cols-1 mx-auto p-5 xl:p-10 gap-3">
                 <div className=" w-full">
                     <p className="text-center font-semibold text-2xl my-5">Irregular Verbs</p>
-                    <table className=" text-base xl:text-xl mx-auto bg-white border">
+                    <table className=" w-[50%] text-xs xl:text-xl mx-auto bg-white border">
                         <thead>
                             <tr>
                                 <th className="bg-secondaryColor">№</th>
@@ -46,18 +46,18 @@ const IrregularVocabulary = () => {
                         <tbody>
                             {data.map((option, index) => (
                                 <tr key={option.id} className={index % 2 === 1 ? "text-left border bg-secondaryColor" : "text-left border"}>
-                                    <td className="px-4 h-[100px] xl:h-[70px] text-base xl:text-lg text-center">{index + 1}</td>
+                                    <td className="px-4 h-[100px] xl:h-[70px] text-xs xl:text-lg text-center">{index + 1}</td>
                                     <td>
-                                        <p className="px-2 h-[100px] xl:h-[70px] text-base xl:text-lg border flex justify-center items-center">V1</p>
-                                        <p className="px-2 h-[100px] xl:h-[70px] text-base xl:text-lg border flex justify-center items-center">V2</p>
-                                        <p className="px-2 h-[100px] xl:h-[70px] text-base xl:text-lg border flex justify-center items-center">V3</p>
+                                        <p className="px-2 h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center">V1</p>
+                                        <p className="px-2 h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center">V2</p>
+                                        <p className="px-2 h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center">V3</p>
                                     </td>
                                     <td>
-                                        <p className="px-1 h-[100px] xl:h-[70px] text-base xl:text-lg border flex justify-center items-center">{option.verb1.toUpperCase()}</p>
-                                        <p className="px-1 h-[100px] xl:h-[70px] text-base xl:text-lg border flex justify-center items-center">{option.verb2.toUpperCase()}</p>
-                                        <p className="px-1 h-[100px] xl:h-[70px] text-base xl:text-lg border flex justify-center items-center">{option.verb3.toUpperCase()}</p>
+                                        <p className="px-1 h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center">{option.verb1.toUpperCase()}</p>
+                                        <p className="px-1 h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center">{option.verb2.toUpperCase()}</p>
+                                        <p className="px-1 h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center">{option.verb3.toUpperCase()}</p>
                                     </td>
-                                    <td className="px-2 h-[100px] xl:h-[70px] text-base xl:text-lg border text-center">{option.verbUzb.toUpperCase()}</td>
+                                    <td className="px-2 h-[100px] xl:h-[70px] text-xs xl:text-lg border text-center">{option.verbUzb.toUpperCase()}</td>
                                 </tr>
                             ))}
                         </tbody>

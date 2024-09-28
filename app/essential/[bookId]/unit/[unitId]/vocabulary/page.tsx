@@ -52,7 +52,7 @@ const Vocabulary = ({ params }: VocabProps) => {
                 <div>
                     <p className=" text-center font-semibold text-2xl my-5">{data[unitId - 1].unit_name}</p>
                     {
-                        <table className=" w-full xl:w-[50%] text-base xl:text-xl mx-auto bg-white border">
+                        <table className=" w-full xl:w-[50%] text-xs xl:text-xl mx-auto bg-white border">
                             <thead>
                                 <tr>
                                     <th className=" bg-secondaryColor">№</th>
@@ -63,9 +63,9 @@ const Vocabulary = ({ params }: VocabProps) => {
                             <tbody>
                                 {data[unitId - 1].options.map((option, index) => (
                                     <tr key={index} className={index % 2 == 1 ? "text-left border bg-secondaryColor" : "text-left border"}>
-                                        <td className="px-4 h-[100px] xl:h-[70px] text-base xl:text-lg text-center">{index + 1}</td>
-                                        <td className="px-6 h-[100px] xl:h-[70px] text-base xl:text-lg border">{option.word_eng.toUpperCase()}</td>
-                                        <td className="px-6 h-[100px] xl:h-[70px] text-base xl:text-lg border">{option.word_uzb}</td>
+                                        <td className="px-4 h-[100px] xl:h-[70px] text-xs xl:text-lg text-center">{index + 1}</td>
+                                        <td className="px-6 h-[100px] xl:h-[70px] text-xs xl:text-lg border">{option.word_eng.toUpperCase()}</td>
+                                        <td className="px-6 h-[100px] xl:h-[70px] text-xs xl:text-lg border">{option.word_uzb}</td>
                                     </tr>
                                 ))}
                             </tbody>
