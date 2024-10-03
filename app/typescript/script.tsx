@@ -1,7 +1,7 @@
 import generateRandomValue from '@/app/typescript/generateRandomValue'
 import firstLatterUpperCase from '@/app/typescript/firstLatterUpperCase'
 
-const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) => {
+const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number, bookId: number) => {
     const message = document.getElementById("message") as HTMLDivElement;
     const hintRef = document.getElementById("hint-ref") as HTMLDivElement;
     const controls = document.getElementById("controls-container") as HTMLButtonElement;
@@ -159,8 +159,8 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number) =>
             loopCount++;
             unitName.classList.add("hidden");
             vocabAudio.classList.remove("hidden");
-            audioUSa.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/usa/${randomWord}.mp3`;
-            audioUk.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/uk/${randomWord}.mp3`;
+            audioUSa.src = `${process.env.NEXT_PUBLIC_BASE_URL}/essential-${bookId}/audio/usa/${randomWord}.mp3`;
+            audioUk.src = `${process.env.NEXT_PUBLIC_BASE_URL}/essential-${bookId}/audio/uk/${randomWord}.mp3`;
             resultText.innerText = "";
             controls.classList.remove('gifBg')
         } else {

@@ -6,6 +6,8 @@ import script from '@/app/typescript/script';
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+import { useRef } from "react";
+
 type Option = {
     word_eng: string;
     word_uzb: string;
@@ -27,6 +29,20 @@ interface VocabProps {
 }
 
 const Vocabulary = ({ params }: VocabProps) => {
+    const audioRefsUsa = useRef<(HTMLAudioElement | null)[]>([]);
+    const audioRefsUk = useRef<(HTMLAudioElement | null)[]>([]);
+
+    const handlePlay = (index: number) => {
+        if (audioRefsUsa.current[index]) {
+            audioRefsUsa.current[index]?.play();
+        }
+    };
+
+    const handlePlayUk = (index: number) => {
+        if (audioRefsUk.current[index]) {
+            audioRefsUk.current[index]?.play();
+        }
+    };
     const [data, setData] = useState<Unit[] | null>(null);
     const [error, setError] = useState<string | null>(null);
     const { bookId, unitId } = params;
@@ -50,6 +66,19 @@ const Vocabulary = ({ params }: VocabProps) => {
         <>
             <main className=" text-lg xl:text-xl grid grid-cols-1 mx-auto p-5 xl:p-10 gap-3">
                 <div>
+                    <Button
+                        onClick={() => {
+                            const link = document.createElement('a');
+                            link.href = `/essential-${bookId}/image/unit-${unitId}.png`;
+                            link.download = `unit-${unitId}.png`;
+                            link.click();
+                        }}
+                        className=""
+                    >
+                        Download Unit
+                    </Button>
+                </div>
+                <div>
                     <p className=" text-center font-semibold text-2xl my-5">{data[unitId - 1].unit_name}</p>
                     {
                         <table className=" w-full xl:w-[50%] text-xs xl:text-xl mx-auto bg-white border">
@@ -58,6 +87,20 @@ const Vocabulary = ({ params }: VocabProps) => {
                                     <th className=" bg-secondaryColor">№</th>
                                     <th className="px-4 py-6 xl:py-2 border bg-secondaryColor">English Word</th>
                                     <th className="px-4 py-6 xl:py-2 border bg-secondaryColor">Uzbek Word</th>
+                                    <th className="px-1 w-[50px] md:w-[80px] py-6 xl:py-2 border bg-secondaryColor">
+                                        <img
+                                            src="https://img.icons8.com/color/48/usa.png"
+                                            alt="usa"
+                                            className=" w-[17px] h-[17px] md:w-[25px] md:h-[25px] xl:w-[30px] xl:h-[30px] mx-auto"
+                                        />
+                                    </th>
+                                    <th className="px-1 w-[50px] md:w-[80px] py-6 xl:py-2 border bg-secondaryColor">
+                                        <img
+                                            src="https://img.icons8.com/color/48/great-britain.png"
+                                            alt="great-britain"
+                                            className=" w-[17px] h-[17px] md:w-[25px] md:h-[25px] xl:w-[30px] xl:h-[30px] mx-auto"
+                                        />
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,6 +109,26 @@ const Vocabulary = ({ params }: VocabProps) => {
                                         <td className="px-4 h-[100px] xl:h-[70px] text-xs xl:text-lg text-center">{index + 1}</td>
                                         <td className="px-6 h-[100px] xl:h-[70px] text-xs xl:text-lg border">{option.word_eng.toUpperCase()}</td>
                                         <td className="px-6 h-[100px] xl:h-[70px] text-xs xl:text-lg border">{option.word_uzb}</td>
+                                        <td className="px-1 h-[100px] xl:h-[70px] text-xs xl:text-lg border">
+                                            <audio ref={(el) => { audioRefsUsa.current[index] = el }} src={`${process.env.NEXT_PUBLIC_BASE_URL}/essential-${bookId}/audio/usa/${option.word_eng}.mp3`} id={`audioUsa-${index}`} />
+                                            <img
+                                                src="/gif/voice.gif"
+                                                alt="Cool Animation"
+                                                className=" cursor-pointer w-[17px] md:w-[25px] md:h-[25px] h-[17px] xl:w-[30px] xl:h-[30px] mx-auto"
+                                                onClick={() => handlePlay(index)}
+                                                title="Play Sound"
+                                            />
+                                        </td>
+                                        <td className="px-1 h-[100px] xl:h-[70px] text-xs xl:text-lg border">
+                                            <audio ref={(el) => { audioRefsUk.current[index] = el }} src={`${process.env.NEXT_PUBLIC_BASE_URL}/essential-${bookId}/audio/uk/${option.word_eng}.mp3`} id={`audioUk-${index}`} />
+                                            <img
+                                                src="/gif/voice.gif"
+                                                alt="Cool Animation"
+                                                className=" cursor-pointer w-[17px] md:w-[25px] md:h-[25px] h-[17px] xl:w-[30px] xl:h-[30px] mx-auto"
+                                                onClick={() => handlePlayUk(index)}
+                                                title="Play Sound"
+                                            />
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

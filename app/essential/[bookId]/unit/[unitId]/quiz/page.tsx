@@ -46,7 +46,7 @@ const Quiz = ({ params }: QuizProps) => {
             const id = Number(params.unitId);
             const selectedUnit = data.find(unit => unit.unit_id === id);
             if (selectedUnit) {
-                script(selectedUnit.options, selectedUnit.unit_name, selectedUnit.unit_id);
+                script(selectedUnit.options, selectedUnit.unit_name, selectedUnit.unit_id, selectedUnit.book_id);
             }
         }
     }, [data, params.unitId]);
