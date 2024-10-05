@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRef } from "react";
 
 type Irregular = {
     id: number;
@@ -12,6 +13,13 @@ type Irregular = {
 const IrregularVocabulary = () => {
     const [data, setData] = useState<Irregular[] | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const audioRefsUk = useRef<(HTMLAudioElement | null)[][]>([]); // 2D array of refs
+
+    const handlePlayUk = (index: number, verbIndex: number) => {
+        if (audioRefsUk.current[index] && audioRefsUk.current[index][verbIndex]) {
+            audioRefsUk.current[index][verbIndex]?.play();
+        }
+    };
 
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/irregular-verbs.json`)
@@ -24,8 +32,6 @@ const IrregularVocabulary = () => {
             .then((jsonData: Irregular[]) => setData(jsonData))
             .catch((err) => setError(err.message));
     }, []);
-
-    console.log(data);
 
     if (error) return <div>Error: {error}</div>;
     if (!data) return <div>Loading...</div>;
@@ -53,9 +59,30 @@ const IrregularVocabulary = () => {
                                         <p className="px-2 h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center">V3</p>
                                     </td>
                                     <td>
-                                        <p className="px-1 h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center">{option.verb1.toUpperCase()}</p>
-                                        <p className="px-1 h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center">{option.verb2.toUpperCase()}</p>
-                                        <p className="px-1 h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center">{option.verb3.toUpperCase()}</p>
+                                        <button className="px-1 w-full h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center" onClick={() => handlePlayUk(index, 0)}>
+                                            {option.verb1.toUpperCase()}
+                                            <audio ref={(el) => {
+                                                if (!audioRefsUk.current[index]) audioRefsUk.current[index] = [];
+                                                audioRefsUk.current[index][0] = el;
+                                            }} src={`${process.env.NEXT_PUBLIC_BASE_URL}/irregular-verbs/audio/${option.verb1}.mp3`} />
+                                        </button>
+                                        <button className="px-1 w-full h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center" onClick={() => handlePlayUk(index, 1)}>
+                                            {option.verb2.toUpperCase()}
+                                            <audio
+                                                ref={(el) => {
+                                                    if (!audioRefsUk.current[index]) audioRefsUk.current[index] = [];
+                                                    audioRefsUk.current[index][1] = el;
+                                                }}
+                                                src={`${process.env.NEXT_PUBLIC_BASE_URL}/irregular-verbs/audio/${option.verb2 === 'was/were' ? 'was_were' : option.verb2}.mp3`}
+                                            />
+                                        </button>
+                                        <button className="px-1 w-full h-[100px] xl:h-[70px] text-xs xl:text-lg border flex justify-center items-center" onClick={() => handlePlayUk(index, 2)}>
+                                            {option.verb3.toUpperCase()}
+                                            <audio ref={(el) => {
+                                                if (!audioRefsUk.current[index]) audioRefsUk.current[index] = [];
+                                                audioRefsUk.current[index][2] = el;
+                                            }} src={`${process.env.NEXT_PUBLIC_BASE_URL}/irregular-verbs/audio/${option.verb3}.mp3`} />
+                                        </button>
                                     </td>
                                     <td className="px-2 h-[100px] xl:h-[70px] text-xs xl:text-lg border text-center">{option.verbUzb.toUpperCase()}</td>
                                 </tr>
