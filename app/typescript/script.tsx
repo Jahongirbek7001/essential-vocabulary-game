@@ -1,7 +1,7 @@
 import generateRandomValue from '@/app/typescript/generateRandomValue'
 import firstLatterUpperCase from '@/app/typescript/firstLatterUpperCase'
 
-const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number, bookId: number) => {
+const scriptType = (options: any, nameUnit: string, linkNameUnit: number, bookId: number) => {
     const message = document.getElementById("message") as HTMLDivElement;
     const hintRef = document.getElementById("hint-ref") as HTMLDivElement;
     const controls = document.getElementById("controls-container") as HTMLButtonElement;
@@ -153,7 +153,7 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number, bo
 
     // Handle win condition
     const handleWin = () => {
-        if (loopCount < 14) {
+        if (loopCount < 1) {
             word.innerHTML = `The word was: <span>${firstLatterUpperCase(randomWord)}</span>`;
             startBtn.innerText = "Continue";
             loopCount++;
@@ -165,15 +165,23 @@ const scriptType = (options: any, nameUnit: string, linkNameNextUnit: number, bo
             controls.classList.remove('gifBg')
         } else {
             resultText.innerHTML = "You Won";
+            word.innerHTML = `The word was: <span>${firstLatterUpperCase(randomWord)}</span>`;
             startBtn.innerText = "Restart";
             startBtn.addEventListener("click", () => {
                 nextUnit.classList.add("hidden");
                 vocabAudio.classList.remove("hidden");
             });
+            audioUSa.src = `${process.env.NEXT_PUBLIC_BASE_URL}/essential-${bookId}/audio/usa/${randomWord}.mp3`;
+            audioUk.src = `${process.env.NEXT_PUBLIC_BASE_URL}/essential-${bookId}/audio/uk/${randomWord}.mp3`;
             nextUnit.classList.remove("hidden");
             controls.classList.add('gifBg')
-
-            linkNextUnit.href = `${linkNameNextUnit + 1}`;
+            if(linkNameUnit < 30) {
+                linkNextUnit.href = `/essential/${bookId}/unit/${linkNameUnit + 1}`;
+            }
+            else if(linkNameUnit == 30) {
+                linkNextUnit.href = `/essential/${bookId + 1}/unit/1`;
+            }
+            console.log(linkNextUnit);
             loopCount = 0;
         }
         blocker();
