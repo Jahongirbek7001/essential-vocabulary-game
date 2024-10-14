@@ -153,7 +153,7 @@ const scriptType = (options: any, nameUnit: string, linkNameUnit: number, bookId
 
     // Handle win condition
     const handleWin = () => {
-        if (loopCount < 1) {
+        if (loopCount < 14) {
             word.innerHTML = `The word was: <span>${firstLatterUpperCase(randomWord)}</span>`;
             startBtn.innerText = "Continue";
             loopCount++;
