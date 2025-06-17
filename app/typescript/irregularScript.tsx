@@ -188,26 +188,26 @@ const IrregularScript = (options: any, id: number) => {
         word.innerHTML = `The word was: <span>${randomWordVerb}</span>`;
         resultText.innerHTML = "You Won";
         startBtn.innerText = "Start";
-        // if (loopCount < 14) {
-        //     word.innerHTML = `The word was: <span>${randomWordVerb}</span>`;
-        //     startBtn.innerText = "Continue";
-        //     loopCount++;
-        //     // unitName.classList.add("hidden");
-        //     // vocabAudio.classList.remove("hidden");
-        //     // audioUSa.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/usa/${randomWordVerbOne}.mp3`;
-        //     // audioUk.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/uk/${randomWordVerbOne}.mp3`;
-        //     resultText.innerText = "";
-        //     controls.classList.remove('gifBg');
-        // } else {
-        //     resultText.innerHTML = "You Won";
-        //     startBtn.innerText = "Restart";
-        //     // startBtn.addEventListener("click", () => {
-        //     //     // nextUnit.classList.add("hidden");
-        //     // });
-        //     // nextUnit.classList.remove("hidden");
-        //     controls.classList.add('gifBg');
-        //     loopCount = 0;
-        // }
+        if (loopCount < 14) {
+            word.innerHTML = `The word was: <span>${randomWordVerb}</span>`;
+            startBtn.innerText = "Continue";
+            loopCount++;
+            // unitName.classList.add("hidden");
+            // vocabAudio.classList.remove("hidden");
+            // audioUSa.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/usa/${randomWordVerbOne}.mp3`;
+            // audioUk.src = `${process.env.NEXT_PUBLIC_BASE_URL}/audio/uk/${randomWordVerbOne}.mp3`;
+            resultText.innerText = "";
+            controls.classList.remove('gifBg');
+        } else {
+            resultText.innerHTML = "You Won";
+            startBtn.innerText = "Restart";
+            // startBtn.addEventListener("click", () => {
+            //     // nextUnit.classList.add("hidden");
+            // });
+            // nextUnit.classList.remove("hidden");
+            controls.classList.add('gifBg');
+            loopCount = 0;
+        }
         blocker();
     };
 

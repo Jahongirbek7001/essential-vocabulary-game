@@ -29,10 +29,10 @@ const Content = () => {
                 <div id="letter-container" className="mt-8 space-y-2">
                 </div>
 
-                <div className=" text-center text-xl font-semibold translate-y-12">
+                {/* <div className=" text-center text-xl font-semibold translate-y-12">
                     The idea was taken from the Youtube channel <br />{" "}
                     <span>Coding Artist</span>
-                </div>
+                </div> */}
             </Card>
 
             <div
